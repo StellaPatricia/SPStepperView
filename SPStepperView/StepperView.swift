@@ -7,7 +7,7 @@
 
 import UIKit
 
-class StepperView: UIView {
+public class StepperView: UIView {
     private let stackView = UIStackView()
     private let progressView = UIProgressView(progressViewStyle: .default)
     private var steps: [String] = []

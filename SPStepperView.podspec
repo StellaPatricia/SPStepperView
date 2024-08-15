@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "SPStepperView"
-  spec.version      = "1.0.2"
+  spec.version      = "1.0.3"
   spec.summary      = "Simple Stepper View"
 
   spec.description  = <<-DESC
@@ -15,7 +15,7 @@ Pod::Spec.new do |spec|
   spec.swift_versions = ['5.0'] # Specify your Swift version here
   spec.source       = { :git => "https://github.com/StellaPatricia/SPStepperView.git", :tag => "#{spec.version}" }
 
-  spec.source_files  = "SPStepperView/StepperView.swift"
+  spec.source_files  = "SPStepperView/**/*.{swift}"
   
   # If you have resources like images, add them here
   # spec.resources = "SPStepperView/Resources/*.png"
