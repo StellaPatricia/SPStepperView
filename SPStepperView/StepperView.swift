@@ -31,6 +31,21 @@ public class StepperView: UIView {
             setupCustomize()
         }
     }
+    public var labelFont: UIFont = .systemFont(ofSize: 12) {
+        didSet {
+            setupCustomize()
+        }
+    }
+    public var colorAchived: UIColor = .gray {
+        didSet {
+            setupView()
+        }
+    }
+    public var colorNotAchived: UIColor = .gray {
+        didSet {
+            setupView()
+        }
+    }
     
     public init(steps: [String], completedImage: UIImage?, incompleteImage: UIImage?) {
         self.steps = steps
@@ -98,10 +113,10 @@ public class StepperView: UIView {
             
             let label = UILabel()
             label.text = step
-            label.numberOfLines = 2
+            label.numberOfLines = 0
             label.textAlignment = .center
-            label.font = UIFont.systemFont(ofSize: 12)
-            label.textColor = index <= Int(percentageProgress * Float(totalSteps - 1)) ? .blue : .black
+            label.font = labelFont
+            label.textColor = index <= Int(percentageProgress * Float(totalSteps - 1)) ? colorAchived : colorNotAchived
             label.adjustsFontSizeToFitWidth = true
             label.minimumScaleFactor = 0.5
             label.translatesAutoresizingMaskIntoConstraints = false
