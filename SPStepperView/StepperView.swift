@@ -1,13 +1,13 @@
 //
-//  SPStepperView.swift
-//  SPStepperView
+//  StepperView.swift
+//  StepperView
 //
 //  Created by Stella Patricia on 15/08/24.
 //
 
 import UIKit
 
-class SPStepperView: UIView {
+class StepperView: UIView {
     private let stackView = UIStackView()
     private let progressView = UIProgressView(progressViewStyle: .default)
     private var steps: [String] = []
