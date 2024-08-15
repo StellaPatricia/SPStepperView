@@ -54,13 +54,14 @@ private let stepperView: StepperView = {
 Add `stepperView` to your view and set up constraints:
 
 ```swift
-view.addSubview(stepperView)
-
+contentView.addSubview(stepperView)
+        
 NSLayoutConstraint.activate([
-    stepperView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-    stepperView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-    stepperView.widthAnchor.constraint(equalToConstant: 300),
-    stepperView.heightAnchor.constraint(equalToConstant: 50)
+    stepperView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+    stepperView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+    stepperView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+    stepperView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+    stepperView.heightAnchor.constraint(equalToConstant: 80)
 ])
 ```
 
@@ -69,18 +70,6 @@ NSLayoutConstraint.activate([
 To set the current step:
 
 ```swift
-stepperView.setCurrentStep(2) // Sets the current step to Step 2
+stepperView.setCurrentStepPercentage(0.4) // 40 %
 ```
 
-To update the progress percentage:
-
-```swift
-stepperView.setProgress(50) // Sets the progress to 50%
-```
-
-### 5. Customize Appearance
-
-You can further customize the appearance of the stepper view by modifying its properties, such as step text, images, and progress indicators.
-```
-
-This Markdown section should fit nicely into your `README.md` file.
