@@ -11,14 +11,28 @@ public class StepperView: UIView {
     private let stackView = UIStackView()
     private let progressView = UIProgressView(progressViewStyle: .default)
     private var steps: [String] = []
-    private var currentStepPercentage: Float = 0.0
     private var completedImage: UIImage?
     private var incompleteImage: UIImage?
+    private var currentStepPercentage: Float = 0.0
     private let stepSpacing: CGFloat = 20
     private let indicatorSize: CGFloat = 32
-    private let progressHeight: CGFloat = 10
+    public var progressHeight: CGFloat = 10 {
+        didSet {
+            setupView()
+        }
+    }
+    public var progressTintColor: UIColor = .blue {
+        didSet {
+            setupCustomize()
+        }
+    }
+    public var progressTrackColor: UIColor = .lightGray {
+        didSet {
+            setupCustomize()
+        }
+    }
     
-    init(steps: [String], completedImage: UIImage?, incompleteImage: UIImage?) {
+    public init(steps: [String], completedImage: UIImage?, incompleteImage: UIImage?) {
         self.steps = steps
         self.completedImage = completedImage
         self.incompleteImage = incompleteImage
@@ -31,14 +45,18 @@ public class StepperView: UIView {
         setupView()
     }
     
-    private func setupView() {
+    private func setupCustomize() {
         stackView.axis = .horizontal
         stackView.spacing = stepSpacing
         stackView.distribution = .fillEqually
         
-        progressView.progressTintColor = .blue
-        progressView.trackTintColor = .lightGray
+        progressView.progressTintColor = progressTintColor
+        progressView.trackTintColor = progressTrackColor
         progressView.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private func setupView() {
+        setupCustomize()
         
         addSubview(progressView)
         addSubview(stackView)
@@ -55,7 +73,7 @@ public class StepperView: UIView {
             progressView.heightAnchor.constraint(equalToConstant: progressHeight),
             progressView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             progressView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            progressView.centerYAnchor.constraint(equalTo: centerYAnchor) // Center progress view vertically
+            progressView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
         
         updateSteps()
@@ -84,8 +102,8 @@ public class StepperView: UIView {
             label.textAlignment = .center
             label.font = UIFont.systemFont(ofSize: 12)
             label.textColor = index <= Int(percentageProgress * Float(totalSteps - 1)) ? .blue : .black
-            label.adjustsFontSizeToFitWidth = true // Adjust font size to fit width
-            label.minimumScaleFactor = 0.5 // Allow scaling to half size
+            label.adjustsFontSizeToFitWidth = true
+            label.minimumScaleFactor = 0.5
             label.translatesAutoresizingMaskIntoConstraints = false
             container.addSubview(label)
             
@@ -103,7 +121,7 @@ public class StepperView: UIView {
         }
     }
     
-    func setCurrentStepPercentage(_ percentage: Float) {
+    public func setCurrentStepPercentage(_ percentage: Float) {
         guard percentage >= 0.0 && percentage <= 1.0 else { return }
         currentStepPercentage = percentage
         updateSteps()
