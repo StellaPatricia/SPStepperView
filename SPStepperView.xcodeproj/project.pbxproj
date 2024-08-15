@@ -11,6 +11,7 @@
 		065D8F5B2C6DA3BC00084837 /* SPStepperView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065D8F502C6DA3BC00084837 /* SPStepperView.framework */; };
 		065D8F602C6DA3BC00084837 /* SPStepperViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065D8F5F2C6DA3BC00084837 /* SPStepperViewTests.swift */; };
 		065D8F612C6DA3BC00084837 /* SPStepperView.h in Headers */ = {isa = PBXBuildFile; fileRef = 065D8F532C6DA3BC00084837 /* SPStepperView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		065D8F6B2C6DA3D000084837 /* SPStepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065D8F6A2C6DA3D000084837 /* SPStepperView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		065D8F542C6DA3BC00084837 /* SPStepperView.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = SPStepperView.docc; sourceTree = "<group>"; };
 		065D8F5A2C6DA3BC00084837 /* SPStepperViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SPStepperViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		065D8F5F2C6DA3BC00084837 /* SPStepperViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPStepperViewTests.swift; sourceTree = "<group>"; };
+		065D8F6A2C6DA3D000084837 /* SPStepperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPStepperView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			children = (
 				065D8F532C6DA3BC00084837 /* SPStepperView.h */,
 				065D8F542C6DA3BC00084837 /* SPStepperView.docc */,
+				065D8F6A2C6DA3D000084837 /* SPStepperView.swift */,
 			);
 			path = SPStepperView;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				065D8F552C6DA3BC00084837 /* SPStepperView.docc in Sources */,
+				065D8F6B2C6DA3D000084837 /* SPStepperView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +415,7 @@
 		065D8F682C6DA3BC00084837 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = U2QXGU8Z2K;
@@ -427,6 +432,7 @@
 		065D8F692C6DA3BC00084837 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = U2QXGU8Z2K;
