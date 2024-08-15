@@ -15,7 +15,11 @@ public class StepperView: UIView {
     private var incompleteImage: UIImage?
     private var currentStepPercentage: Float = 0.0
     private let stepSpacing: CGFloat = 20
-    private let indicatorSize: CGFloat = 32
+    public var indicatorSize: CGFloat = 32 {
+        didSet {
+            setupView()
+        }
+    }
     public var progressHeight: CGFloat = 10 {
         didSet {
             setupView()
