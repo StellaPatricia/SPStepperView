@@ -15,4 +15,6 @@
 To integrate `SPStepperView` into your project using CocoaPods, add the following line to your `Podfile`:
 
 ```ruby
-pod 'SPStepperView', '~> 1.0'
+pod 'SPStepperView', '~> 1.0.5'
+
+## How To Use
