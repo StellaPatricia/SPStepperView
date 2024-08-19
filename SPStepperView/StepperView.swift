@@ -8,46 +8,60 @@
 import UIKit
 
 public class StepperView: UIView {
-    private let stackView = UIStackView()
-    private let progressView = UIProgressView(progressViewStyle: .default)
-    private var steps: [String] = []
+    private lazy var stackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = stepSpacing
+        stack.distribution = .fillEqually
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    private lazy var progressView: UIProgressView = {
+        let progress = UIProgressView(progressViewStyle: .default)
+        progress.translatesAutoresizingMaskIntoConstraints = false
+        return progress
+    }()
+    
+    private var steps: [String]
     private var completedImage: UIImage?
     private var incompleteImage: UIImage?
     private var currentStepPercentage: Float = 0.0
     private let stepSpacing: CGFloat = 20
+    
     public var indicatorSize: CGFloat = 32 {
         didSet {
-            setupView()
+            updateSteps()
         }
     }
     public var progressHeight: CGFloat = 10 {
         didSet {
-            setupView()
+            setupProgressViewConstraints()
         }
     }
     public var progressTintColor: UIColor = .blue {
         didSet {
-            setupCustomize()
+            progressView.progressTintColor = progressTintColor
         }
     }
     public var progressTrackColor: UIColor = .lightGray {
         didSet {
-            setupCustomize()
+            progressView.trackTintColor = progressTrackColor
         }
     }
     public var labelFont: UIFont = .systemFont(ofSize: 12) {
         didSet {
-            setupCustomize()
+            updateSteps()
         }
     }
     public var colorAchived: UIColor = .gray {
         didSet {
-            setupView()
+            updateSteps()
         }
     }
     public var colorNotAchived: UIColor = .gray {
         didSet {
-            setupView()
+            updateSteps()
         }
     }
     
@@ -60,57 +74,53 @@ public class StepperView: UIView {
     }
     
     required init?(coder: NSCoder) {
+        self.steps = []
         super.init(coder: coder)
         setupView()
     }
     
-    private func setupCustomize() {
-        stackView.axis = .horizontal
-        stackView.spacing = stepSpacing
-        stackView.distribution = .fillEqually
-        
-        progressView.progressTintColor = progressTintColor
-        progressView.trackTintColor = progressTrackColor
-        progressView.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
     private func setupView() {
-        setupCustomize()
-        
         addSubview(progressView)
         addSubview(stackView)
         
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        setupStackViewConstraints()
+        setupProgressViewConstraints()
+        
+        updateSteps()
+    }
+    
+    private func setupStackViewConstraints() {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
-        
+    }
+    
+    private func setupProgressViewConstraints() {
         NSLayoutConstraint.activate([
             progressView.heightAnchor.constraint(equalToConstant: progressHeight),
             progressView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             progressView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             progressView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
-        
-        updateSteps()
     }
     
     private func updateSteps() {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
         let totalSteps = steps.count
-        let percentageProgress = currentStepPercentage
-        progressView.setProgress(percentageProgress, animated: true)
+        let stepIndex = Int(currentStepPercentage * Float(totalSteps - 1))
+        
+        progressView.setProgress(currentStepPercentage, animated: true)
         
         for (index, step) in steps.enumerated() {
             let container = UIView()
             container.translatesAutoresizingMaskIntoConstraints = false
             stackView.addArrangedSubview(container)
             
-            let indicatorImageView = UIImageView(image: index <= Int(percentageProgress * Float(totalSteps - 1)) ? completedImage : incompleteImage)
+            let indicatorImageView = UIImageView(image: index <= stepIndex ? completedImage : incompleteImage)
             indicatorImageView.contentMode = .scaleAspectFit
             indicatorImageView.translatesAutoresizingMaskIntoConstraints = false
             container.addSubview(indicatorImageView)
@@ -120,7 +130,7 @@ public class StepperView: UIView {
             label.numberOfLines = 0
             label.textAlignment = .center
             label.font = labelFont
-            label.textColor = index <= Int(percentageProgress * Float(totalSteps - 1)) ? colorAchived : colorNotAchived
+            label.textColor = index <= stepIndex ? colorAchived : colorNotAchived
             label.adjustsFontSizeToFitWidth = true
             label.minimumScaleFactor = 0.5
             label.translatesAutoresizingMaskIntoConstraints = false
