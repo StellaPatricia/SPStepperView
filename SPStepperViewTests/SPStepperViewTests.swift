@@ -13,6 +13,19 @@ final class SPStepperViewTests: XCTestCase {
     private let completed = UIGraphicsImageRenderer(size: CGSize(width: 1, height: 1)).image { _ in }
     private let incomplete = UIGraphicsImageRenderer(size: CGSize(width: 2, height: 2)).image { _ in }
 
+    // Layout only re-runs reliably for views hosted in a window.
+    private var window: UIWindow!
+
+    override func setUp() {
+        super.setUp()
+        window = UIWindow(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
+    }
+
+    override func tearDown() {
+        window = nil
+        super.tearDown()
+    }
+
     private func makeStepper(_ count: Int) -> StepperView {
         let stepper = StepperView(
             steps: (1...max(count, 1)).prefix(count).map { "Step \($0)" },
@@ -20,6 +33,7 @@ final class SPStepperViewTests: XCTestCase {
             incompleteImage: incomplete
         )
         stepper.frame = CGRect(x: 0, y: 0, width: 320, height: 80)
+        window.addSubview(stepper)
         stepper.layoutIfNeeded()
         return stepper
     }
