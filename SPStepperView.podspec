@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "SPStepperView"
-  spec.version      = "1.2.0"
+  spec.version      = "1.2.1"
   spec.summary      = "A customizable step indicator with a progress bar for iOS."
 
   spec.description  = <<-DESC

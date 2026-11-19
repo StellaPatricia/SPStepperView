@@ -16,6 +16,24 @@
 
 ## Installation
 
+### Swift Package Manager
+
+In Xcode, choose **File › Add Package Dependencies…** and enter:
+
+```
+https://github.com/StellaPatricia/SPStepperView
+```
+
+Or add it to your `Package.swift`:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/StellaPatricia/SPStepperView", from: "1.2.1")
+]
+```
+
+and add `"SPStepperView"` to your target's dependencies.
+
 ### CocoaPods
 
 To integrate `SPStepperView` into your project using CocoaPods, add the following line to your `Podfile`:
